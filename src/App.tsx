@@ -1,22 +1,47 @@
 import { PlusCircle } from 'phosphor-react';
+import { useState } from 'react';
+import { Container } from './components/Container';
 import { Header } from './components/Header';
+import { Task } from './components/shared/Task';
 import { TaskList } from './components/Task/TaskList';
 import { Button } from './components/ui/Button';
 import { Input } from './components/ui/Input';
 
 export function App() {
+	const [task, setTask] = useState({ text: '', isCompleted: false } as Task);
+	const [tasks, setTasks] = useState<Task[]>([]);
+
+	function handleAddTask() {
+		if (!task.text.length) return;
+
+		setTasks([...tasks, task]);
+		setTask({ text: '', isCompleted: false });
+	}
+
 	return (
 		<>
 			<Header />
 
-			<main className="max-w-2xl mx-auto">
-				<div className="flex gap-2 -mt-[30px]">
-					<Input placeholder="Adicione uma nova tarefa" />
-					<Button icon={PlusCircle}>Criar</Button>
+			<Container>
+				<div className="flex flex-col sm:flex-row gap-2 -mt-[30px]">
+					<Input
+						value={task.text}
+						onChange={(e) =>
+							setTask({
+								text: e.target.value,
+								isCompleted: false,
+							})
+						}
+						placeholder="Adicione uma nova tarefa"
+					/>
+
+					<Button icon={PlusCircle} onClick={handleAddTask} aria-label="Adicionar tarefa">
+						Criar
+					</Button>
 				</div>
 
-				<TaskList />
-			</main>
+				<TaskList tasks={tasks} onUpdateTask={setTasks} />
+			</Container>
 		</>
 	);
 }
