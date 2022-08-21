@@ -12,7 +12,7 @@ export function App() {
 	const [tasks, setTasks] = useState<Task[]>([]);
 
 	function handleAddTask() {
-		if (!task.text.length) return;
+		if (!task.text.trim().length) return;
 
 		setTasks([...tasks, task]);
 		setTask({ id: 0, text: '', isCompleted: false });
@@ -36,7 +36,12 @@ export function App() {
 						placeholder="Adicione uma nova tarefa"
 					/>
 
-					<Button icon={PlusCircle} onClick={handleAddTask} aria-label="Adicionar tarefa">
+					<Button
+						icon={PlusCircle}
+						onClick={handleAddTask}
+						aria-label="Adicionar tarefa"
+						disabled={!task.text.trim().length}
+					>
 						Criar
 					</Button>
 				</div>
