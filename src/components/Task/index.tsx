@@ -17,7 +17,7 @@ export function Task({ task, tasks, onUpdateTask }: Props) {
 					checked={task.isCompleted}
 					onChange={() => {
 						const updatedTasks = tasks.map((t) =>
-							t.text === task.text ? { ...t, isCompleted: !t.isCompleted } : t,
+							t.id === task.id ? { ...t, isCompleted: !t.isCompleted } : t,
 						);
 						onUpdateTask(updatedTasks);
 					}}
@@ -39,7 +39,7 @@ export function Task({ task, tasks, onUpdateTask }: Props) {
 			<button
 				type="button"
 				className="hover:text-red-300 hover:bg-gray-400 rounded-md p-1 transition-colors duration-300 focus:outline-none focus:outline focus:outline-offset-2 focus:outline-blue-200"
-				onClick={() => onUpdateTask(tasks.filter((t) => t.text !== task.text))}
+				onClick={() => onUpdateTask(tasks.filter((t) => t.id !== task.id))}
 				aria-label="Deletar tarefa"
 			>
 				<Trash size={16} />

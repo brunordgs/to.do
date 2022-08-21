@@ -31,7 +31,7 @@ export function TaskList({ tasks, onUpdateTask }: Props) {
 
 			{tasks.length ? (
 				tasks.map((task) => (
-					<div key={task.text} className="mb-2 last:mb-0">
+					<div key={task.id} className="mb-2 last:mb-0">
 						<Task task={task} tasks={tasks} onUpdateTask={onUpdateTask} />
 					</div>
 				))
