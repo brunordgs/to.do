@@ -9,7 +9,7 @@ interface Props {
 
 export function TaskList({ tasks, onUpdateTask }: Props) {
 	const totalTasks = tasks.length;
-	const finishedTasks = tasks.filter((task) => task.isCompleted).length;
+	const finishedTasks = tasks.reduce((acc, cur) => acc + Number(cur.isCompleted), 0);
 
 	return (
 		<section>
